@@ -1,0 +1,11 @@
+{
+  "name": "tea5767node",
+  "version": "1.0.0",
+  "description": "Tea5767",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Benjamin AUBRY",
+  "license": "ISC"
+}
