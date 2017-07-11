@@ -2,7 +2,7 @@ var i2c = require('i2c-bus'),
   i2c1 = i2c.openSync(1);
 
 var TEA5767_ADDR = 0x60
-let freq=97.4;
+let freq=90;
 
 getChipId().then((id)=>{
   console.log("Chip Id: "+id);
@@ -73,7 +73,7 @@ i2c1.writeI2cBlockSync(TEA5767_ADDR,init,5,data);
        i = true;
        console.log("written");     
 } catch (error) {
-console.log(error);
+console.log(JSON.stringify(error));
         i = false
        attempt +=1
        if(attempt > 100000){
