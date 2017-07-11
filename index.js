@@ -15,7 +15,7 @@ getFrequency().then((freq)=>{
 writeFrequency(freq);
 
 while(true){
-  
+
 }
 
 function getChipId(){
@@ -39,6 +39,7 @@ function getFrequency(){
 }
 
 function writeFrequency(freq){
+  let cof=32768;
   let data=Buffer.alloc(0);
    let i=false;
    let attempt = 0;
