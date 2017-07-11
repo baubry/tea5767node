@@ -7,5 +7,8 @@
     "test": "npm test"
   },
   "author": "Benjamin AUBRY",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "i2c-bus": "^1.2.2"
+  }
 }
