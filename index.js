@@ -68,12 +68,11 @@ console.log("writeFrequency "+freq);
    data[3] =  0b00000000;
    while (i==false){
      try {
-//i2c1.i2cWriteSync(TEA5767_ADDR,5,data);
 i2c1.writeI2cBlockSync(TEA5767_ADDR,init,5,data);
        i = true;
        console.log("written");     
 } catch (error) {
-  
+  console.log(error);
   if(error.errno!=121){
           i = false
        attempt +=1
@@ -82,7 +81,7 @@ i2c1.writeI2cBlockSync(TEA5767_ADDR,init,5,data);
        }
 }
 else{
-console.log(error.errno);
+ i = true;
 }
      }
    }
