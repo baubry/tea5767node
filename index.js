@@ -14,9 +14,14 @@ getFrequency().then((freq)=>{
 
 writeFrequency(freq);
 
-while(true){
+getChipId().then((id)=>{
+  console.log("Chip Id: "+id);
+});
 
-}
+getFrequency().then((freq)=>{
+  console.log("Frequency: "+freq);
+});
+
 
 function getChipId(){
   return new Promise(function(resolve,reject){
@@ -39,8 +44,9 @@ function getFrequency(){
 }
 
 function writeFrequency(freq){
+console.log("writeFrequency "+freq);
   let cof=32768;
-  let data=Buffer.alloc(0);
+  let data=Buffer.alloc(5);
    let i=false;
    let attempt = 0;
    let mute=0;
@@ -50,7 +56,6 @@ function writeFrequency(freq){
    let freqL = freq14bit & 0xFF;
 
   let init = freqH&0x3F;
-
    data[0] = freqL;
    if(mute==0 && direction==1){
     data[1] = 0b10010000;
@@ -69,14 +74,13 @@ function writeFrequency(freq){
     data[2] = 0b00011111;
    }
    data[3] =  0b00000000;
-
    while (i==false){
      try {
-       i2c1.i2cWrite(TEA5767_ADDR,5,buf,function(){
-         
-       });
+i2c1.i2cWriteSync(TEA5767_ADDR,5,data);
        i = true;
-     } catch (error) {
+       console.log("written");     
+} catch (error) {
+console.log(error);
         i = false
        attempt +=1
        if(attempt > 100000){
