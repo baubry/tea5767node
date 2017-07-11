@@ -8,20 +8,15 @@ getChipId().then((id)=>{
   console.log("Chip Id: "+id);
 });
 
-getFrequency().then((freq)=>{
-  console.log("Frequency: "+freq);
-});
+console.log("Frequency: "+getFrequency());
 
 writeFrequency(freq);
 
-getChipId().then((id)=>{
-  console.log("Chip Id: "+id);
-});
+  console.log("Frequency: "+getFrequency());
 
-getFrequency().then((freq)=>{
-  console.log("Frequency: "+freq);
-});
-
+while(true){
+  
+}
 
 function getChipId(){
   return new Promise(function(resolve,reject){
@@ -33,14 +28,11 @@ function getChipId(){
 }
 
 function getFrequency(){
-  return new Promise(function(resolve,reject){
     var buf=new Buffer(5);
-    i2c1.i2cRead(TEA5767_ADDR, 5, buf, ()=>{
-      let frequency = ((buf[0] & 0x3F) << 8) + buf[1];
-      let cfreq=(frequency * 32768 / 4 - 225000) / 1000000;
-      resolve(cfreq);
-    });
-  });
+    i2c1.i2cReadSync(TEA5767_ADDR, 5, buf);
+    let frequency = ((buf[0] & 0x3F) << 8) + buf[1];
+    let cfreq=(frequency * 32768 / 4 - 225000) / 1000000;
+    return cfreq;
 }
 
 function writeFrequency(freq){
