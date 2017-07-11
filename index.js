@@ -74,11 +74,13 @@ i2c1.writeI2cBlockSync(TEA5767_ADDR,init,5,data);
        console.log("written");     
 } catch (error) {
 console.log(JSON.stringify(error));
-        i = false
+if(error.errno!=121){
+          i = false
        attempt +=1
        if(attempt > 100000){
           break;
        }
+}
      }
    }
 }
