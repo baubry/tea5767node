@@ -72,7 +72,9 @@ function writeFrequency(freq){
 
    while (i==false){
      try {
-       i2c1.i2cWriteSync(TEA5767_ADDR,5,buf);
+       i2c1.i2cWrite(TEA5767_ADDR,5,buf,function(){
+         
+       });
        i = true;
      } catch (error) {
         i = false
